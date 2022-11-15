@@ -1,0 +1,44 @@
+<h1>アイテム詳細</h1>
+  <%= image_tag @item.get_image(300,400) %>
+  商品名<%= @item.name %><br>
+  星(件のレビュー)<br>
+  <%= @item.price %><br>
+  <%= @item.introduction %><br>
+
+<h1>レビュー投稿</h1>
+  <%= form_with model: @review, url: reviews_path do |f| %>
+    <!--エラーメッセージ-->
+    <% if @review.errors.any? %>
+      <%= @review.errors.count %>件のエラーが発生しました
+      <ul>
+        <% @review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <!--商品コードの送信-->
+    <%= f.hidden_field :item_id, :value => @item.id %>
+    <!-- 評価 -->
+    <%= f.label :evaluation,'評価' %>
+    <div id="star"></div>
+    <!-- 評価javascript -->
+    <script>
+
+    var elem = document.getElementById('star');
+    var opt = {
+        size     : 36,
+      starOff:  '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>',
+      scoreName: 'review[evaluation]',
+      half: true,
+
+    };
+    raty(elem,opt);
+    </script>
+  <!-- 評価 -->
+  <%= f.label :content, 'レビュー内容' %>
+  <%= f.text_area :content %>
+
+  <%= f.submit '投稿する' %>
+<% end %>
