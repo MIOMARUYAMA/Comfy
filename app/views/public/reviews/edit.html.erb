@@ -1,2 +1,3 @@
-<h1>Public::Reviews#edit</h1>
-<p>Find me in app/views/public/reviews/edit.html.erb</p>
+<h1>レビュー編集</h1>
+  <%= form_with model: @review, url:admin_item_path do |f| %>
+  <%= f.text_field :name %>

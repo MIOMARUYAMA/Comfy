@@ -19,10 +19,11 @@ class Public::ReviewsController < ApplicationController
   def destroy
   end
 
+
   private
 
     def review_params
-      params.require(:review).permit(:item_id, :content, :end_user_id, :evaluation)
+      params.require(:review).permit(:item_id, :content, :end_user_id, :evaluation, :status)
     end
 
 end

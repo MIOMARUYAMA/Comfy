@@ -13,4 +13,5 @@ class Review < ApplicationRecord
   validates :content, presence: true
   validates :evaluation, presence: true
 
+  enum status: {draft: 1,published: 0}
 end

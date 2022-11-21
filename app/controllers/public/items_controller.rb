@@ -4,6 +4,7 @@ class Public::ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @review = Review.new
+    @reviews = Review.where(status: :published)
   end
 
   #検索結果を表示する
@@ -19,4 +20,8 @@ class Public::ItemsController < ApplicationController
     def get_results
       @search = Item.ransack(params[:q])
     end
+    def review_params
+      params.require(:review).permit(:item_id, :evaluation, :content, :end_user_id, :status)
+    end
+
 end

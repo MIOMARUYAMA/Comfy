@@ -13,4 +13,6 @@ class HomesController < ApplicationController
     sign_in user
     redirect_to end_user_path(current_end_user.id), notice: 'ゲストユーザーとしてログインしました。'
   end
+
+
 end

@@ -10,13 +10,17 @@ Rails.application.routes.draw do
 
   scope module: :public do
     resources :comments, only: [:new, :create, :show]
-    resources :reviews, only: [:new, :create, :edit, :update, :destroy]
     get 'end_users/unsubscribe'
     patch 'end_users/withdrawal'
     get 'registrations/new'
-    resources :end_users, only: [:show]
+    resources :end_users, only: [:show] do
+      member do
+        get :draft
+      end
+    end
     get 'items/search'
     resources :items, only: [:show, :index]
+    resources :reviews, only: [:new, :create, :edit, :update, :destroy]
   end
   namespace :admin do
     resources :end_users, only: [:index, :edit, :update, :show]
