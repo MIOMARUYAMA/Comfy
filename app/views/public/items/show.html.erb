@@ -1,12 +1,12 @@
 <h1>アイテム詳細</h1>
   <%= image_tag @item.get_image(300,400) %>
   商品名<%= @item.name %><br>
-  星(件のレビュー)<br>
-  <%= @item.price %><br>
+  (<%= @item.reviews.count %>件のレビュー)<br>
+  ¥<%= @item.price %><br>
   <%= @item.introduction %><br>
 
 <h1>レビュー投稿</h1>
-  <%= form_with model: @review, url: reviews_path do |f| %>
+  <%= form_with model: [@item, @review] do |f| %>
     <!--エラーメッセージ-->
     <% if @review.errors.any? %>
       <%= @review.errors.count %>件のエラーが発生しました
@@ -18,6 +18,7 @@
     <% end %>
     <!--商品コードの送信-->
     <%= f.hidden_field :item_id, :value => @item.id %>
+    <!--ユーザーidの送信-->
     <%= f.hidden_field :end_user_id, :value => current_end_user.id %>
     <!-- 評価 -->
     <%= f.label :evaluation,'評価' %>
@@ -50,7 +51,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @reviews.each do |review| %>
+    <% @item.reviews.each do |review| %>
     <tr>
       <td><%= review.end_user.user_name %></td>
       <!--星評価-->
@@ -71,6 +72,27 @@
         </script>
       </td>
       <td><%= review.content %></td>
+     <% if review.favorited_by?(current_end_user) %>
+        <p>
+          <%= link_to review_favorites_path(review), method: :delete do %>
+            ♥<%= review.favorites.count %> いいね
+          <% end %>
+        </p>
+        <% else %>
+        <p>
+          <%= link_to review_favorites_path(review), method: :post do %>
+            ♡<%= review.favorites.count %> いいね
+          <% end %>
+        </p>
+      <% end %>
+      <% if review.end_user == current_end_user %>
+      <td>
+        <%= link_to "編集する", edit_review_path(@item, review), class:"btn btn-success" %>
+      </td>
+      <td>
+        <%= link_to "削除する", review_path(review), class:"btn btn-danger", method: :delete,"data-confirm"=>"本当に消しますか？" %>
+      </td>
+      <% end %>
     </tr>
     <% end %>
   </tbody>

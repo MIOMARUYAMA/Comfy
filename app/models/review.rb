@@ -2,6 +2,11 @@ class Review < ApplicationRecord
   belongs_to :end_user
   belongs_to :item
   has_one_attached :image
+  has_many :favorites, dependent: :destroy
+
+  def favorited_by?(end_user)
+    favorites.exists?(end_user_id: end_user.id)
+  end
 
   def get_image
     if image.attached?

@@ -1,2 +1,9 @@
-<h1>Public::EndUsers#show</h1>
+<h1>マイページ</h1>
+  <% @reviews.each do |review| %>
+      <%= image_tag review.item.get_image(100,100) %>
+    <%=link_to item_review_path(review.id) do %>
+     <%= review.content.truncate(10) %>
+    <% end %>
+  <% end %>
+
 <%= link_to "下書き一覧", draft_end_user_path(current_end_user.id) %>

@@ -1,0 +1,17 @@
+レビュー詳細
+    <div id="star-rate-<%= @review.id %>"></div>
+    <script>
+      var elem = document.getElementById('star-rate-<%= @review.id %>');
+      var opt = {
+        size: 36,
+        starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+            score: <%= @review.evaluation %>,
+          };
+          raty(elem, opt)
+        </script>
+レビュー内容<%= @review.content %>
+<%= link_to "編集する", edit_item_review_path(@review) %>
