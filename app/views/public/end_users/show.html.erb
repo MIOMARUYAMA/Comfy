@@ -1,7 +1,7 @@
 <h1>マイページ</h1>
   <% @reviews.each do |review| %>
       <%= image_tag review.item.get_image(100,100) %>
-    <%=link_to item_review_path(review.id) do %>
+    <%=link_to edit_review_path(review.id) do %>
      <%= review.content.truncate(10) %>
     <% end %>
   <% end %>

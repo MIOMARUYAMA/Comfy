@@ -1,6 +1,6 @@
 class Public::EndUsersController < ApplicationController
   def show
-    @reviews = Review.where(status: :published)
+    @reviews = current_end_user.reviews.where(status: :published)
   end
 
   def withdrawal

@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   belongs_to :genre
   has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  
+
   def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/icon_002680_256.png')

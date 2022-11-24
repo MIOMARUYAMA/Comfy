@@ -1,5 +1,5 @@
 <h1>レビュー編集</h1>
-  <%= form_with model: @review, url: item_review_path do |f| %>
+  <%= form_with model: @review, url: review_path do |f| %>
     <!--商品コードの送信-->
     <%= f.hidden_field :item_id, :value => @review.item_id %>
     <!--ユーザーidの送信-->
