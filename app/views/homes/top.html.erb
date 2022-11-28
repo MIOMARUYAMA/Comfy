@@ -1,5 +1,14 @@
+ <div class= "container">
+   <div class= "row">
+     <div class= "col-12"></div>
+       <h1>comfy</h1>
+         <%= link_to 'ゲストログイン', homes_guest_sign_in_path, method: :post %>
+
+
 <h1>アイテム一覧</h1>
   <% @items.each do |item| %>
     <%= image_tag item.get_image(200,200) %>
     <%= link_to item.name, item_path(item.id) %>
   <% end %>
+  </div>
+</div>

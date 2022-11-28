@@ -9,6 +9,6 @@ class Item < ApplicationRecord
       file_path = Rails.root.join('app/assets/images/icon_002680_256.png')
       image.attach(io: File.open(file_path), filename: 'default-image.png', content_type: 'image/pmg')
     end
-      image.variant(resize_to_limit: [width, height]).processed
+    image.variant(resize_to_limit: [width, height]).processed
   end
 end

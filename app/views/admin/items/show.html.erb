@@ -1,3 +1,6 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 offset-md-3">
 <h1>アイテム詳細</h1>
     <%= image_tag @item.get_image(300,400) %>
     商品名<%= @item.name %><br>
@@ -38,8 +41,15 @@
       <td>
       </td>
       <td>
-        <%= link_to "削除する", item_review_path(review), class:"btn btn-danger", method: :delete,"data-confirm"=>"本当に消しますか？" %>
+        <%= link_to "削除する", review_path(review), class:"btn btn-danger", method: :delete,"data-confirm"=>"本当に消しますか？" %>
       </td>
     </tr>
     <% end %>
   </tbody>
+
+  </div>
+  <!-- col-sm-12 .... --->
+  </div>
+<!-- row -->
+</div>
+<!-- container -->

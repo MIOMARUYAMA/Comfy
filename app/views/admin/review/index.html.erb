@@ -1,0 +1,28 @@
+<div class= "container">
+  <div class= "row">
+    レビュー一覧
+    <div class="card-columns">
+      <% @reviews.each do |review| %>
+        <div class="card ">
+          <table>
+            <thead>
+              <tr>
+                <th>レビュー投稿者</th>
+                <th>レビュー内容</th>
+                <th>アイテム名</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= review.end_user.user_name %></td>
+                <td><%= review.content %></td>
+                <td><%= review.item.name %></td>
+              </tr>
+          <%= link_to "削除する", review_path(review), class:"btn btn-danger", method: :delete,"data-confirm"=>"本当に消しますか？" %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+  </div>
+</div>
+</div>

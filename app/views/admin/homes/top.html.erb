@@ -1,5 +1,5 @@
 <h1>アイテム一覧</h1>
   <% @items.each do |item| %>
-    <%= image_tag item.get_image(200,200) %>
+    <%= image_tag item.get_image(10,10) %>
     <%= link_to item.name, admin_item_path(item.id) %>
   <% end %>

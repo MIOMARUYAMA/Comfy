@@ -1,24 +1,33 @@
-# README
+# <comfy>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
+憂鬱な整理を少しでも楽しく快適に過ごせるアイテムを見つけられる、簡単に比較して自分に合うものを発見できるレビューサイトです。
 
-Things you may want to cover:
+### テーマを選んだ理由
+個人によって生理の症状が違うため最適なアイテムは人それぞれ異なりますが、日本ではまだまだ生理について公に話される場が少ないです。
+ネットで情報収集すると、生理用品のレビューサイト自体が少なく、サイトに登録されている商品にも偏りがあります。
+そのため販売している会社の公式サイトを行き来したり、商品名で検索をかけて調べることになりますが、
+レビューを一つのサイトのみで比較することができれば検索時間を短縮できます。
+また、海外製品も紹介することで、より幅広い選択肢の中から自分に合ったアイテムを検索することが可能です。
 
-* Ruby version
+### ターゲットユーザ
+・自分に合う生理用品を見つけたい人
+・生理で悩む大切な人の手助けをしたい人、生理についての理解を深めたい人
 
-* System dependencies
+### 主な利用シーン
+・似たような悩みを持つ人はどんな商品を評価しているのかを、一つのサイトのみで比較・検索したいとき
+・一部のブランドから販売されている商品だけではなく、海外製品を含め幅広い選択肢の中で商品比較をしたいとき
 
-* Configuration
+## 設計書
+<...>
 
-* Database creation
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+検討中です
