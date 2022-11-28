@@ -1,14 +1,15 @@
  <div class= "container">
    <div class= "row">
-     <div class= "col-12"></div>
-       <h1>comfy</h1>
-         <%= link_to 'ゲストログイン', homes_guest_sign_in_path, method: :post %>
-
-
-<h1>アイテム一覧</h1>
-  <% @items.each do |item| %>
-    <%= image_tag item.get_image(200,200) %>
-    <%= link_to item.name, item_path(item.id) %>
-  <% end %>
+     <div class= "col-12">
+         <h4>生理を少しでも楽にしてくれる新しい選択肢を見つけましょう</h4>
+           <p>生理だから不快であることが当たり前、仕方ないと感じている方へ</p>
+           <p>comfyは選択肢を広げ、自分の体に合ったアイテムを比較・発見できる生理用品専門のレビューサイトです</p>
+             <%= link_to new_end_user_registration_path do %><br>
+               <button type="button" class="btn btn-outline-primary">新規登録</button>
+            <% end %>
+             <%= link_to homes_guest_sign_in_path, method: :post do %>
+               <button type="button" class="btn btn-outline-secondary">ゲストログイン</button>
+            <% end %>
+    </div>
   </div>
 </div>

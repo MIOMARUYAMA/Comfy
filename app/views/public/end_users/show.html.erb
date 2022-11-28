@@ -1,9 +1,36 @@
-<h1>マイページ</h1>
-  <% @reviews.each do |review| %>
-      <%= image_tag review.item.get_image(100,100) %>
-    <%=link_to edit_review_path(review.id) do %>
-     <%= review.content.truncate(10) %>
-    <% end %>
-  <% end %>
+<h3>マイページ</h3>
+  <div class= "container">
+    <div class= "row">
+      <div class= "col-6">
+        <h4>投稿済みレビュー一覧</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>アイテム</th>
+                <th>レビュー内容</th>
+                <th></th>
 
-<%= link_to "下書き一覧", draft_end_user_path(current_end_user.id) %>
+              </tr>
+            </thead>
+            <tbody>
+              <% @reviews.each do |review| %>
+              <tr>
+                <td>
+                  <%= image_tag review.item.get_image(100,100) %><br>
+                    <%= link_to review.item.name, item_path(review.item.id) %>
+                </td>
+                <td>
+                  <%=link_to edit_review_path(review.id) do %>
+                    <%= review.content.truncate(10) %>
+                </td>
+                  <% end %>
+              <% end %>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <div class= "col-6">
+        <%= link_to "下書き一覧", draft_end_user_path(current_end_user.id) %>
+      </div>
+    </div>
+  </div>
