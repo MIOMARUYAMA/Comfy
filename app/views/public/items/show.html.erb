@@ -1,65 +1,62 @@
-<h1>アイテム詳細</h1>
-  <%= image_tag @item.get_image(300,400) %>
-  商品名<%= @item.name %><br>
-  (<%= @item.reviews.count %>件のレビュー)<br>
-  ¥<%= @item.price %><br>
-  <%= @item.introduction %><br>
+<div class="container">
+      <div class="row">
+    <h4 class="mt-2">アイテム詳細</h4>
+            <%= image_tag @item.get_image(300,400) %>
+            <table>
+              <tbody>
+                <tr><td>商品名</td><td><%= @item.name %></td><td>(<%= @item.reviews.count %>件のレビュー)</td></tr>
+                <tr><td>商品価格</td><td></td><td>¥<%= @item.price %></td></tr>
+                <tr><td>商品説明</td><td></td><td><%= @item.introduction %></td></tr>
+              </tbody>
+            </table>
+              <%= form_with model: [@item, @review] do |f| %>
+                <!--エラーメッセージ-->
+                <% if @review.errors.any? %>
+                  <%= @review.errors.count %>件のエラーが発生しました
+                  <ul>
+                    <% @review.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                <% end %>
+                <!--商品コードの送信-->
+                <%= f.hidden_field :item_id, :value => @item.id %>
+                <!--ユーザーidの送信-->
+                <%= f.hidden_field :end_user_id, :value => current_end_user.id %>
+                <!-- 評価 -->
+                <%= f.label :evaluation,'評価' %>
+                <!-- 評価javascript -->
+                <div class="position-static mb-3"><div id="star"></div></div>
+                <script>
+                  var elem = document.getElementById('star');
+                  var opt = {
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    scoreName: 'review[evaluation]',
+                    half: true,
+                  };
+                  raty(elem,opt);
+                </script>
+                <!-- 評価 -->
+                <%= f.text_area :content, placeholder: "レビュー内容" %>
+                <div class="row">
+                  <div><%= f.select :status, [["公開", "published"], ["下書き", "draft"]] %></div>
+                  <div class="col offset-1"><%= f.submit '投稿する' %></div>
+                </div>
+              <% end %>
+      </div>
 
-<h1>レビュー投稿</h1>
-  <%= form_with model: [@item, @review] do |f| %>
-    <!--エラーメッセージ-->
-    <% if @review.errors.any? %>
-      <%= @review.errors.count %>件のエラーが発生しました
-      <ul>
-        <% @review.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    <% end %>
-    <!--商品コードの送信-->
-    <%= f.hidden_field :item_id, :value => @item.id %>
-    <!--ユーザーidの送信-->
-    <%= f.hidden_field :end_user_id, :value => current_end_user.id %>
-    <!-- 評価 -->
-    <%= f.label :evaluation,'評価' %>
-    <div id="star"></div>
-    <!-- 評価javascript -->
-    <script>
-    var elem = document.getElementById('star');
-    var opt = {
-      size     : 36,
-      starOff:  '<%= asset_path('star-off.png') %>',
-      starOn : '<%= asset_path('star-on.png') %>',
-      starHalf: '<%= asset_path('star-half.png') %>',
-      scoreName: 'review[evaluation]',
-      half: true,
-    };
-    raty(elem,opt);
-    </script>
-  <!-- 評価 -->
-  <%= f.label :content, 'レビュー内容' %>
-  <%= f.text_area :content %>
-  <%= f.select :status, [["公開", "published"], ["下書き", "draft"]] %>
-  <%= f.submit '投稿する' %>
-<% end %>
-<h1>レビュー一覧</h1>
-  <thead>
-    <tr>
-      <th>投稿者</th>
-      <th></th>
-      <th>レビュー内容</th>
-    </tr>
-  </thead>
+<h4 class="my-3">レビュー一覧</h4>
   <tbody>
     <% @item.reviews.each do |review| %>
-    <tr>
-      <td><%= review.end_user.user_name %></td>
+      <tr><td>投稿者:</td><td><%= review.end_user.user_name %></td></tr>
       <!--星評価-->
-      <td>
         <div id="star-rate-<%= review.id %>"></div>
         <script>
-        var elem = document.getElementById('star-rate-<%= review.id %>');
-        var opt = {
+        var elem2 = document.getElementById('star-rate-<%= review.id %>');
+        var opt2 = {
             size: 36,
             starOff:  '<%= asset_path('star-off.png') %>',
             starOn : '<%= asset_path('star-on.png') %>',
@@ -68,10 +65,10 @@
             readOnly: true,
             score: <%= review.evaluation %>,
           };
-          raty(elem, opt)
+          raty(elem2, opt2);
         </script>
-      </td>
-      <td><%= review.content %></td>
+      <tr><td>レビュー内容</td><td></td><td><%= review.content %></td></tr>
+  </tbody>
      <% if review.favorited_by?(current_end_user) %>
         <p>
           <%= link_to review_favorites_path(review), method: :delete do %>
@@ -95,4 +92,6 @@
       <% end %>
     </tr>
     <% end %>
-  </tbody>
+  </div>
+    </div>
+

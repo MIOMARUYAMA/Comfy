@@ -1,0 +1,17 @@
+<h4>アイテム一覧</h4>
+ <div class="container">
+   <div class="row">
+      <% @items.each do |item| %>
+        <div class="col-sm-3">
+          <%= link_to item_path(item.id) do %>
+            <%= image_tag item.get_image(200,200) %>
+          <% end %>
+            <div class ="row">
+              <%= link_to item_path(item.id) do %>
+                <%= item.name %><br>
+              <% end %>
+            </div>
+        </div>
+      <% end %>
+   </div>
+ </div>

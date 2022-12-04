@@ -11,8 +11,13 @@ class Public::ReviewsController < ApplicationController
     @item = Item.find(params[:item_id])
     @review = current_end_user.reviews.new(review_params)
     @review.item_id = @item.id
-    @review.save
-    redirect_to end_user_path(current_end_user.id)
+    if @review.save
+      redirect_to item_path(@item.id)
+      flash[:notice] = "レビューが投稿されました！"
+    else
+      redirect_to item_path(@item.id)
+      flash[:notice] = "星評価は必須項目です"
+    end
   end
 
   def edit
@@ -26,6 +31,9 @@ class Public::ReviewsController < ApplicationController
   end
 
   def destroy
+    @review = Review.find(params[:id])
+    @review.destroy
+    redirect_to item_path(@review.item.id)
   end
 
 

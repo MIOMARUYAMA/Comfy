@@ -1,5 +1,7 @@
-<h1>アイテム一覧</h1>
+<h4 class="my-2 ml-2">アイテム一覧</h4>
+  <div class="container">
   <% @items.each do |item| %>
-    <%= image_tag item.get_image(10,10) %>
+    <%= image_tag item.get_image(300,400) %>
     <%= link_to item.name, admin_item_path(item.id) %>
   <% end %>
+</div>
