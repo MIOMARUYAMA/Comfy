@@ -1,31 +1,31 @@
-      <h4 class="my-2">レビュー編集</h4>
-  <div class="container" style="width:20%">
-        <%= form_with model: @review, url: review_path do |f| %>
-            <!--商品コードの送信-->
-            <%= f.hidden_field :item_id, :value => @review.item_id %>
-            <!--ユーザーidの送信-->
-            <%= f.hidden_field :end_user_id, :value => current_end_user.id %>
-            <!-- 評価 -->
-            <%= f.label :evaluation,'評価' %>
-            <div id="star"></div>
-            <!-- 評価javascript -->
-            <script>
-            var elem = document.getElementById('star');
-            var opt = {
-              size     : 36,
-              starOff:  '<%= asset_path('star-off.png') %>',
-              starOn : '<%= asset_path('star-on.png') %>',
-              starHalf: '<%= asset_path('star-half.png') %>',
-              scoreName: 'review[evaluation]',
-              half: true,
-            };
-            raty(elem,opt);
-            </script>
-          <!-- 評価 -->
-          <%= f.label :content, 'レビュー内容' %><br>
-          <%= f.text_area :content %><br>
-          <%= f.select :status, [["公開", "published"], ["上書き", "draft"]] %>
-          <%= f.submit '保存する', class:"btn btn-outline-success" %>
-        <% end %>
-    </div>
-  </div>
+<h4 class="my-2">レビュー編集</h4>
+<div class="container" style="width:20%">
+  <%= form_with model: @review, url: review_path do |f| %>
+    <!--商品コードの送信-->
+    <%= f.hidden_field :item_id, :value => @review.item_id %>
+    <!--ユーザーidの送信-->
+    <%= f.hidden_field :end_user_id, :value => current_end_user.id %>
+    <!-- 評価 -->
+    <%= f.label :evaluation,'評価' %>
+    <div id="star"></div>
+    <!-- 評価javascript -->
+    <script>
+      var elem = document.getElementById('star');
+      var opt = {
+        size     : 36,
+        starOff:  '<%= asset_path('star-off.png') %>',
+        starOn : '<%= asset_path('star-on.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        scoreName: 'review[evaluation]',
+        half: true,
+      };
+      raty(elem,opt);
+    </script>
+    <!-- 評価 -->
+    <%= f.label :content, 'レビュー内容' %><br>
+    <%= f.text_area :content %><br>
+    <%= f.select :status, [["公開", "published"], ["上書き", "draft"]] %><br>
+    <%= f.submit '保存する', class:"btn btn-outline-success" %>
+    <%= link_to "削除する", review_path(@review), class:"btn btn-outline-danger", method: :delete,"data-confirm"=>"本当に消しますか？" %>
+  <% end %>
+</div>

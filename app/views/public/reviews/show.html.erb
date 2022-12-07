@@ -1,17 +1,45 @@
-レビュー詳細
-    <div id="star-rate-<%= @review.id %>"></div>
-    <script>
-      var elem = document.getElementById('star-rate-<%= @review.id %>');
-      var opt = {
-        size: 36,
-        starOff:  '<%= asset_path('star-off.png') %>',
-            starOn : '<%= asset_path('star-on.png') %>',
-            starHalf: '<%= asset_path('star-half.png') %>',
-            half: true,
-            readOnly: true,
-            score: <%= @review.evaluation %>,
-          };
-          raty(elem, opt)
-        </script>
-レビュー内容<%= @review.content %>
-<%= link_to "編集する", edit_item_review_path(@review) %>
+<div class="container">
+  <div class="row">
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <%= image_tag @review.item.get_image(200,200) %>
+            <%=link_to item_path(@review.item_id) do %>
+              <%= @review.item.name %>
+            <% end %>
+          </td>
+        </tr>
+        <!--星評価-->
+        <tr>
+          <td>
+            <div id="star-rate-<%= @review.id %>"></div>
+            <script>
+              var starForEachReview = document.getElementById('star-rate-<%= @review.id %>');
+              starForEachReview.innerHTML=''
+              var opt2 = {
+                size: 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                half: true,
+                readOnly: true,
+                score: <%= @review.evaluation %>,
+              };
+              raty(starForEachReview, opt2);
+            </script>
+          </td>
+        </tr>
+        <tr>
+          <td>レビュー内容: <%= @review.content %></td>
+        </tr>
+        <tr>
+          <td>
+            <%= link_to "編集する", edit_review_path(@review), class:"btn btn-outline-success" %>
+          </td>
+        </tr>
+      <tbody>
+    </table>
+  </div>
+</div>
+

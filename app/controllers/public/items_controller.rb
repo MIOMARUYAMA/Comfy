@@ -4,7 +4,7 @@ class Public::ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @review = Review.new
-    @reviews = Review.where(status: :published)
+    @reviews = @item.reviews.where(status: :published)
   end
 
   #検索結果を表示する

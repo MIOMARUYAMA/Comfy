@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :end_users, only: [:index, :edit, :update, :show]
     resources :genres, only: [:index, :edit, :update, :create]
-    resources :items, only: [:new, :show, :create]
+    resources :items, only: [:new, :show, :create, :destroy]
     get 'homes/top'
   end
 

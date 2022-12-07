@@ -5,18 +5,31 @@
     </div>
       <table class="table table-hover table-inverse">
         <tbody>
-          <tr><td>会員ID</td><td><%= @end_user.id %></td></tr>
-          <tr><td>氏名</td><td><%= @end_user.last_name %><%= @end_user.first_name %></td></tr>
-          <tr><td>フリガナ</td><td><%= @end_user.last_name_kana %><%= @end_user.first_name_kana %></td></tr>
-          <tr><td>メールアドレス</td><td><%= @end_user.email %></td></tr>
-          <tr><td>会員ステータス</td><td><%= @end_user.is_active ? '有効' : '退会' %></td></tr>
+          <tr>
+            <td>会員ID</td><td><%= @end_user.id %></td>
+          </tr>
+          <tr>
+            <td>氏名</td>
+            <td><%= @end_user.last_name %><%= @end_user.first_name %></td>
+          </tr>
+          <tr>
+            <td>フリガナ</td>
+            <td><%= @end_user.last_name_kana %><%= @end_user.first_name_kana %></td>
+          </tr>
+          <tr>
+            <td>メールアドレス</td>
+            <td><%= @end_user.email %></td>
+          </tr>
+          <tr>
+            <td>会員ステータス</td>
+            <td><%= @end_user.is_active ? '有効' : '退会' %></td>
+          </tr>
         </tbody>
       </table>
       <div class="row justify-content-center">
         <%= link_to  end_users_withdrawal_path, method: :patch, "data-confirm" => "本当に退会させますか？" do %>
           <button class="btn btn-danger">退会にする</button>
         <% end %>
-        <%#= link_to "レビュー一覧を見る", admin_path, {class: "btn btn-primary"} %>
       </div>
   </div>
 </main>

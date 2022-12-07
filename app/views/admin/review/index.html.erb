@@ -1,6 +1,6 @@
+<h4 class="my-2 ml-2">レビュー一覧</h4>
 <div class= "container">
   <div class= "row">
-    レビュー一覧
     <div class="card-columns">
       <% @reviews.each do |review| %>
         <div class="card ">
@@ -18,11 +18,11 @@
                 <td><%= review.content %></td>
                 <td><%= review.item.name %></td>
               </tr>
-          <%= link_to "削除する", review_path(review), class:"btn btn-danger", method: :delete,"data-confirm"=>"本当に消しますか？" %>
+              <%= link_to "削除する", review_path(review), class:"btn btn-danger", method: :delete,"data-confirm"=>"本当に消しますか？" %>
             </tbody>
           </table>
         </div>
       <% end %>
+    </div>
   </div>
-</div>
 </div>

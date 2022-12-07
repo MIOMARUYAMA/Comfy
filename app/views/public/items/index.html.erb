@@ -6,11 +6,11 @@
           <%= link_to item_path(item.id) do %>
             <%= image_tag item.get_image(200,200) %>
           <% end %>
-            <div class ="row">
-              <%= link_to item_path(item.id) do %>
-                <%= item.name %><br>
-              <% end %>
-            </div>
+          <div class ="row">
+            <%= link_to item_path(item.id) do %>
+              <%= item.name %><br>
+            <% end %>
+          </div>
         </div>
       <% end %>
    </div>

@@ -1,10 +1,13 @@
- <h4 class="my-2 ml-2">下書き一覧</h4>
-    <div class="container">
-      <div class="row">
-       <% @reviews.each do |review| %>
-         <%=link_to edit_review_path(review.id) do %>
-           <%= review.content.truncate(10) %>
-        <% end %>
+<h4 class="my-2 ml-2">下書き一覧</h4>
+  <div class="container">
+    <div class="card-columns">
+      <% @reviews.each do |review| %>
+        <div class="card">
+          <%=link_to edit_review_path(review.id) do %>
+            <%= review.content.truncate(10) %>
+            <%= review.item.name %>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>

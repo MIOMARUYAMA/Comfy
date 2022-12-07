@@ -1,53 +1,72 @@
 <div class="container">
 <h4 class="mt-2 ml-2">アイテム詳細</h4>
   <div class="row">
-    <div class="col-5">
-    <%= image_tag @item.get_image(300,400) %>
+    <div class="col-4">
+      <%= image_tag @item.get_image(200,200) %>
     </div>
-            <table class="col-5">
-              <tbody>
-                <tr><td>商品名</td><td><%= @item.name %></td><td>(<%= @item.reviews.count %>件のレビュー)</td></tr>
-                <tr><td>商品価格</td><td></td><td>¥<%= @item.price %></td></tr>
-                <tr><td>商品説明</td><td></td><td><%= @item.introduction %></td></tr>
-              </tbody>
-            </table>
-</div>
-<h4 class="mt-2 ml-2">レビュー一覧</h4>
+    <table class="col-8">
+      <tbody>
+        <tr>
+          <td>商品名</td>
+          <td></td>
+          <td><%= @item.name %></td>
+        </tr>
+        <tr>
+          <td>商品価格</td>
+          <td></td>
+          <td>¥<%= @item.price %></td>
+        </tr>
+        <tr>
+          <td>商品説明</td>
+          <td></td>
+          <td><%= @item.introduction %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-2 my-3">
+    <%= link_to "アイテムを削除", admin_item_path(@item), class:"btn btn-danger", method: :delete,"data-confirm"=>"本当に消しますか？" %>
+  </div>
+  <h4 class="mt-2 ml-2">
+    レビュー一覧(<%= @item.reviews.count %>件のレビュー)
+  </h4>
   <table>
     <tbody>
-    <% @item.reviews.each do |review| %>
-    <tr><td>投稿者:</td><td><%= review.end_user.user_name %></td></tr>
-      <!--星評価-->
-        <div id="star-rate-<%= review.id %>"></div>
-      <tr>
-      <td>
-        <script>
-        var elem = document.getElementById('star-rate-<%= review.id %>');
-        var opt = {
-            size: 36,
-            starOff:  '<%= asset_path('star-off.png') %>',
-            starOn : '<%= asset_path('star-on.png') %>',
-            starHalf: '<%= asset_path('star-half.png') %>',
-            half: true,
-            readOnly: true,
-            score: <%= review.evaluation %>,
-          };
-          raty(elem, opt)
-        </script>
-      </td>
-    </tr>
-      <tr><td>レビュー内容</td><td><%= review.content %></td></tr>
-      <tr>
-      <td>
-        <%= link_to "削除する", review_path(review), class:"btn btn-danger", method: :delete,"data-confirm"=>"本当に消しますか？" %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-  </div>
-  <!-- col-sm-12 .... --->
-  </div>
-<!-- row -->
+      <% @item.reviews.each do |review| %>
+        <tr>
+          <td>投稿者:</td>
+          <td><%= review.end_user.user_name %></td>
+        </tr>
+        <tr>
+          <td>
+            <!--星評価-->
+            <div id="star-rate-<%= review.id %>"></div>
+            <script>
+              var elem = document.getElementById('star-rate-<%= review.id %>');
+              var opt = {
+                  size: 36,
+                  starOff:  '<%= asset_path('star-off.png') %>',
+                  starOn : '<%= asset_path('star-on.png') %>',
+                  starHalf: '<%= asset_path('star-half.png') %>',
+                  half: true,
+                  readOnly: true,
+                  score: <%= review.evaluation %>,
+                };
+                raty(elem, opt)
+            </script>
+          </td>
+        </tr>
+        <tr>
+          <td>レビュー内容</td>
+          <td><%= review.content %></td>
+        </tr>
+        <tr>
+          <td>
+            <%= link_to "削除する", review_path(review), class:"btn btn-danger", method: :delete,"data-confirm"=>"本当に消しますか？" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-<!-- container -->
