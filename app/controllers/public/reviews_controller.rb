@@ -22,6 +22,12 @@ class Public::ReviewsController < ApplicationController
 
   def edit
     @review = Review.find(params[:id])
+    if @review.end_user == current_end_user
+      render edit
+    else
+      redirect_to item_path
+    end
+
   end
 
   def update
