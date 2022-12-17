@@ -22,12 +22,9 @@ class Public::ReviewsController < ApplicationController
 
   def edit
     @review = Review.find(params[:id])
-    if @review.end_user == current_end_user
-      render edit
-    else
-      redirect_to item_path
+    unless @review.end_user.id == current_end_user.id
+      redirect_to item_path(@review.item.id), alert: 'このページへは遷移できません。'
     end
-
   end
 
   def update
@@ -38,8 +35,14 @@ class Public::ReviewsController < ApplicationController
 
   def destroy
     @review = Review.find(params[:id])
-    @review.destroy
-    redirect_to item_path(@review.item.id)
+    if @review.end_user.id == current_end_user.id
+      @review.destroy
+      redirect_to item_path(@review.item.id)
+      flash[:notice] = "レビューを削除しました"
+    else
+      redirect_to item_path(@review.item.id)
+      flash[:alert] = "他人のレビューは削除できません"
+    end
   end
 
 
